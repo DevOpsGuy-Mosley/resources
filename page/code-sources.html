@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Codes Sources - Resources</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            background-color: #01103a;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            width: 100vw;
+            height: 100vh;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        nav.navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: linear-gradient(90deg, #1e3c72, #2a5298);
+            display: flex;
+            align-items: center;
+            padding: 0 2.5rem;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            font-weight: 600;
+            font-size: 1.1rem;
+            letter-spacing: 0.05em;
+            border-bottom: 6px solid #0a1f3d;
+        }
+
+        .navbar-left a {
+            color: #f0f0f0;
+            text-decoration: none;
+            margin-right: 2.5rem;
+            transition: color 0.3s ease;
+            padding: 0.5rem 0;
+            border-bottom: 3px solid transparent;
+        }
+
+        .navbar-left a:hover {
+            color: #a8d0ff;
+            border-bottom: 3px solid #a8d0ff;
+        }
+
+        .navbar-left a.active {
+            background-color: #0a1f3d;
+            border-radius: 0.3rem;
+            padding: 0.5rem 1rem;
+            color: #a8d0ff;
+            font-weight: 700;
+            border-bottom: none;
+        }
+
+        .navbar-center input[type="search"] {
+            width: 300px;
+            padding: 0.4rem 0.75rem;
+            border-radius: 0.3rem;
+            border: none;
+            font-size: 1rem;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #01103a;
+        }
+
+        .navbar-center input[type="search"]::placeholder {
+            color: #2a5298;
+            opacity: 0.7;
+        }
+
+        .btn-search {
+            margin-left: 0.5rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.3rem;
+            border: none;
+            background-color: #a8d0ff;
+            color: #01103a;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-search:hover {
+            background-color: #7a9edc;
+        }
+
+        .btn-logout {
+            background: none;
+            border: 2px solid #f0f0f0;
+            color: #f0f0f0;
+            padding: 0.4rem 1rem;
+            border-radius: 0.3rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-logout:hover {
+            background-color: #a8d0ff;
+            color: #01103a;
+            border-color: #a8d0ff;
+        }
+
+        .main-content {
+            padding-top: 90px;
+            flex: 1;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-bottom: 80px;
+        }
+
+        .sources-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 0 2rem;
+        }
+
+        .sources-header h1 {
+            color: white;
+            font-size: 2.2rem;
+            margin: 0;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            border-bottom: 3px solid #3aB8cf;
+            padding-bottom: 0.5rem;
+        }
+
+        .sources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+            padding: 0 2rem;
+        }
+
+        .source-card {
+            background: rgba(42, 82, 152, 0.3);
+            border-radius: 1rem;
+            border: 1px solid #3aB8cf;
+            padding: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .source-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .source-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #3aB8cf;
+            font-weight: 600;
+        }
+
+        .source-description {
+            color: #e6f3ff;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .source-meta {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.8rem;
+            margin: 1rem 0;
+        }
+
+        .source-meta span {
+            background: rgba(58, 184, 207, 0.15);
+            padding: 0.4rem 0.8rem;
+            border-radius: 0.5rem;
+            color: white;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .source-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(58, 184, 207, 0.3);
+            color: #b8e2ff;
+            font-size: 0.9rem;
+        }
+
+        .source-author {
+            color: #3aB8cf;
+            font-weight: 600;
+        }
+
+        .btn-add {
+            padding: 0.7rem 1.4rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 8px rgba(58, 184, 207, 0.2);
+            background-color: white;
+            color: #2a5298;
+            border: 2px solid #2a5298;
+        }
+
+        .btn-add:hover {
+            background-color: #2a5298;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 0 2rem;
+        }
+
+        .filter-select {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid #3aB8cf;
+            background: rgba(42, 82, 152, 0.3);
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .filter-select option {
+            background-color: #01103a;
+            color: white;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #3aB8cf;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            z-index: 1000;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1050;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(1, 16, 58, 0.9);
+        }
+
+        .modal-content {
+            background-color: #01103a;
+            margin: 5% auto;
+            padding: 2rem;
+            border: 2px solid #3aB8cf;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 1rem;
+            color: white;
+            position: relative;
+        }
+
+        .modal-header {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #3aB8cf;
+            border-bottom: 2px solid #3aB8cf;
+            padding-bottom: 0.8rem;
+        }
+
+        .modal-close {
+            position: absolute;
+            right: 1.5rem;
+            top: 1.5rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #3aB8cf;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .modal input[type="text"],
+        .modal textarea,
+        .modal select {
+            width: 100%;
+            padding: 0.8rem;
+            margin-top: 0.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid #3aB8cf;
+            background-color: rgba(58, 184, 207, 0.1);
+            color: white;
+        }
+
+        .modal label {
+            display: block;
+            margin-top: 1rem;
+            font-weight: 600;
+        }
+
+        .modal .buttons {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+
+        .modal .submit-btn,
+        .modal .cancel-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal .submit-btn {
+            background-color: #3aB8cf;
+            color: white;
+            border: none;
+        }
+
+        .modal .cancel-btn {
+            background-color: transparent;
+            color: white;
+            border: 1px solid #3aB8cf;
+        }
+
+        .import-info {
+            font-size: 0.9rem;
+            color: #3aB8cf;
+            margin-top: 0.5rem;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn-filter {
+            padding: 0.7rem 1.4rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+            background-color: rgba(58, 184, 207, 0.1);
+            color: white;
+            border: 1px solid #3aB8cf;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-filter:hover {
+            background-color: rgba(58, 184, 207, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .source-icon {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: #3aB8cf;
+        }
+
+        .source-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            justify-content: flex-end;
+        }
+
+        .btn-download,
+        .btn-replace,
+        .btn-delete {
+            padding: 0.5rem;
+            border-radius: 0.3rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-download {
+            background-color: rgba(58, 184, 207, 0.1);
+            color: #3aB8cf;
+        }
+
+        .btn-replace {
+            background-color: rgba(255, 193, 7, 0.1);
+            color: #ffc107;
+        }
+
+        .btn-delete {
+            background-color: rgba(255, 99, 71, 0.1);
+            color: tomato;
+        }
+
+        .btn-download:hover,
+        .btn-replace:hover,
+        .btn-delete:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-download:hover {
+            background-color: rgba(58, 184, 207, 0.2);
+        }
+
+        .btn-replace:hover {
+            background-color: rgba(255, 193, 7, 0.2);
+        }
+
+        .btn-delete:hover {
+            background-color: rgba(255, 99, 71, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <a href="home.html">Accueil</a>
+            <a href="liens.html">Liens</a>
+            <a href="code-sources.html" class="active">Code source</a>
+        </div>
+        <div class="navbar-center">
+            <input type="search" placeholder="Rechercher..." aria-label="Recherche" />
+            <button type="button" class="btn-search" aria-label="Rechercher">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85zm-5.242 1.106a5 5 0 1 1 0-10 5 5 0 0 1 0 10z"/>
+                </svg>
+            </button>
+        </div>
+        <div class="navbar-right">
+            <button class="btn-logout">Déconnexion</button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="sources-header">
+            <h1>Codes sources partagés</h1>
+            <div class="header-buttons">
+                <button class="btn-filter" id="filter-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2z"/>
+                    </svg>
+                    Filtrer
+                </button>
+                <button class="btn-add" id="ajouter-btn">Ajouter un code source</button>
+            </div>
+        </div>
+
+        <div class="filters" style="display: none;">
+            <select class="filter-select" id="categoryFilter">
+                <option value="">Toutes les catégories</option>
+                <option value="frontend">Frontend</option>
+                <option value="backend">Backend</option>
+                <option value="fullstack">Full Stack</option>
+            </select>
+            <select class="filter-select" id="languageFilter">
+                <option value="">Tous les langages</option>
+                <option value="html">HTML</option>
+                <option value="css">CSS</option>
+                <option value="javascript">JavaScript</option>
+                <option value="typescript">TypeScript</option>
+                <option value="python">Python</option>
+                <option value="java">Java</option>
+                <option value="php">PHP</option>
+                <option value="ruby">Ruby</option>
+                <option value="csharp">C#</option>
+            </select>
+        </div>
+
+        <div class="sources-grid">
+            <div class="source-card">
+                <div class="source-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
+                    </svg>
+                </div>
+                <div class="source-title">Exemple de code source intéressant</div>
+                <div class="source-description">
+                    Description détaillée du code source. Ce code permet de...
+                </div>
+                <div class="source-meta">
+                    <span class="source-category">Backend</span>
+                    <span class="source-language">Python</span>
+                </div>
+                <div class="source-info">
+                    <span class="source-author">Jean Dupont</span>
+                    <span class="source-date">2025-04-01</span>
+                </div>
+                <div class="source-actions">
+                    <button class="btn-download" onclick="downloadSource(this)" title="Télécharger">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                        </svg>
+                    </button>
+                    <button class="btn-replace" onclick="replaceSource(this)" title="Remplacer">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+                            <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+                        </svg>
+                    </button>
+                    <button class="btn-delete" onclick="deleteSource(this)" title="Supprimer">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+    </main>
+
+    <footer>
+        <p>© 2025 Resources - Tous droits réservés.</p>
+    </footer>
+
+    <!-- Modal d'ajout de code source -->
+    <div id="addSourceModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" id="addSourceModalClose">&times;</span>
+            <div class="modal-header">Ajouter un code source</div>
+            <form id="addSourceForm">
+                <label for="sourceTitle">Titre du code source:</label>
+                <input type="text" id="sourceTitle" name="sourceTitle" required>
+
+                
+                <label for="sourceCategory">Catégorie:</label>
+                <select id="sourceCategory" name="sourceCategory" required>
+                    <option value="">Sélectionner une catégorie</option>
+                    <option value="frontend">Frontend</option>
+                    <option value="backend">Backend</option>
+                    <option value="fullstack">Full Stack</option>
+                </select>
+
+                <label for="sourceLanguage">Langage de développement:</label>
+                <select id="sourceLanguage" name="sourceLanguage" required>
+                    <option value="">Sélectionner un langage</option>
+                    <option value="html">HTML</option>
+                    <option value="css">CSS</option>
+                    <option value="javascript">JavaScript</option>
+                    <option value="typescript">TypeScript</option>
+                    <option value="python">Python</option>
+                    <option value="java">Java</option>
+                    <option value="php">PHP</option>
+                    <option value="ruby">Ruby</option>
+                    <option value="csharp">C#</option>
+                </select>
+
+                <label for="sourceFile">Importer le code source:</label>
+                <input type="file" id="sourceFile" name="sourceFile" webkitdirectory directory multiple required />
+                <div class="import-info">Le dossier ne doit pas dépasser 100 Mo.</div>
+
+                <div class="buttons">
+                    <button type="submit" class="submit-btn">Ajouter</button>
+                    <button type="button" class="cancel-btn" id="sourceCancelBtn">Annuler</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const addSourceBtn = document.getElementById('ajouter-btn');
+            const addSourceModal = document.getElementById('addSourceModal');
+            const sourceModalClose = document.getElementById('addSourceModalClose');
+            const sourceCancelBtn = document.getElementById('sourceCancelBtn');
+            const addSourceForm = document.getElementById('addSourceForm');
+
+            function closeSourceModal() {
+                addSourceModal.style.display = 'none';
+                addSourceForm.reset();
+            }
+
+            addSourceBtn.addEventListener('click', () => {
+                addSourceModal.style.display = 'block';
+            });
+
+            sourceModalClose.addEventListener('click', closeSourceModal);
+            sourceCancelBtn.addEventListener('click', closeSourceModal);
+
+            window.addEventListener('click', (event) => {
+                if (event.target === addSourceModal) {
+                    closeSourceModal();
+                }
+            });
+
+            // Gestion des filtres
+            const categoryFilter = document.getElementById('categoryFilter');
+            const languageFilter = document.getElementById('languageFilter');
+
+            function applyFilters() {
+                const selectedCategory = categoryFilter.value;
+                const selectedLanguage = languageFilter.value;
+                
+                // Logique de filtrage à implémenter
+                console.log('Filtres appliqués:', {
+                    category: selectedCategory,
+                    language: selectedLanguage
+                });
+            }
+
+            categoryFilter.addEventListener('change', applyFilters);
+            languageFilter.addEventListener('change', applyFilters);
+
+            const filterBtn = document.getElementById('filter-btn');
+            const filtersDiv = document.querySelector('.filters');
+
+            filterBtn.addEventListener('click', () => {
+                filtersDiv.style.display = filtersDiv.style.display === 'none' ? 'flex' : 'none';
+            });
+
+            function downloadSource(button) {
+                const sourceCard = button.closest('.source-card');
+                // Logique de téléchargement à implémenter
+                console.log('Télécharger le code source:', sourceCard);
+            }
+
+            function replaceSource(button) {
+                const sourceCard = button.closest('.source-card');
+                // Logique de remplacement à implémenter
+                console.log('Remplacer le code source:', sourceCard);
+            }
+
+            function deleteSource(button) {
+                const sourceCard = button.closest('.source-card');
+                if (confirm('Êtes-vous sûr de vouloir supprimer ce code source ?')) {
+                    // Logique de suppression à implémenter
+                    console.log('Supprimer le code source:', sourceCard);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
